@@ -59,4 +59,91 @@ public class Strings {
         return ret;
     }
 
+    /**
+     * (#125)
+     * Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.
+     *
+     * Note: For the purpose of this problem, we define empty string as valid palindrome.
+     *
+     * @param s The string.
+     * @return Whether is it a palindrome.
+     */
+    public boolean isPalindrome(String s) {
+        char[] strArray = s.toCharArray();
+        int left = 0;
+        int right = strArray.length-1;
+
+        if(s == "" || strArray.length == 1) {
+            return true;
+        }
+
+        while(left < right) {
+            while(!Character.isLetter(strArray[left]) && !Character.isDigit(strArray[left])) {
+                left++;
+                if(left == strArray.length-1) {
+                    return true;
+                }
+            }
+
+            while(!Character.isLetter(strArray[right]) && !Character.isDigit(strArray[right])) {
+                right--;
+                if(right == 0) {
+                    return true;
+                }
+            }
+
+            if(Character.toLowerCase(strArray[left]) != Character.toLowerCase(strArray[right])) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+        return true;
+    }
+
+    /**
+     * (#28)
+     * Implement strStr().
+     *
+     * Return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
+     *
+     * Clarification:
+     *
+     * What should we return when needle is an empty string? This is a great question to ask during an interview.
+     *
+     * For the purpose of this problem, we will return 0 when needle is an empty string. This is consistent to C's strstr() and Java's indexOf().
+     *
+     * @param haystack The haystack.
+     * @param needle The needle.
+     * @return The first occurrence of the needle in the haystack.
+     */
+    public int strStr(String haystack, String needle) {
+        if(needle.length() == 0) {
+            return 0;
+        }
+        if(haystack.length() == 0) {
+            return -1;
+        }
+
+        for(int h = 0; h < haystack.length(); h++) {
+
+            if(h + needle.length() > haystack.length()) {
+                return -1;
+            }
+
+            if(haystack.charAt(h) == needle.charAt(0)) {
+                for(int n = 0; n < needle.length(); n++) {
+                    if(haystack.charAt(h+n) != needle.charAt(n)) {
+                        break;
+                    }
+                    if(n == needle.length()-1) {
+                        return h;
+                    }
+                }
+            }
+
+        }
+        return -1;
+    }
+
 }

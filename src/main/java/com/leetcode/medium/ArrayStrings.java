@@ -8,6 +8,53 @@ import java.util.List;
 public class ArrayStrings {
 
     /**
+     * (#15)
+     * Given an array nums of n integers, are there elements a, b, c in nums such that a + b + c = 0? Find all unique triplets in the array which gives the sum of zero.
+     *
+     * Note:
+     *
+     * The solution set must not contain duplicate triplets.
+     *
+     * @param nums The array of integers.
+     * @return The list of unique triplets.
+     */
+    public List<List<Integer>> threeSum(int[] nums) {
+        List<List<Integer>> retList = new ArrayList<>();
+        Arrays.sort(nums);
+
+        int left;
+        int right;
+
+        // a + b = -c
+        for(int i = 0; i < nums.length; i++) {
+            if (i > 0 && nums[i] == nums[i - 1]) {
+                continue;
+            }
+            left = i+1;
+            right = nums.length-1;
+            while(left < right) {
+                if(nums[left] + nums[right] < -nums[i]) {
+                    left++;
+                } else if(nums[left] + nums[right] > -nums[i]) {
+                    right--;
+                } else {
+                    retList.add(Arrays.asList(nums[i], nums[left], nums[right]));
+                    left++;
+                    right--;
+                    while(left < right && nums[left] == nums[left-1]) {
+                        left++;
+                    }
+                    while(left < right && nums[right] == nums[right+1]) {
+                        right--;
+                    }
+                }
+            }
+        }
+
+        return retList;
+    }
+
+    /**
      * (#49)
      * Given an array of strings, group anagrams together.
      *

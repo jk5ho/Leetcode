@@ -1,7 +1,9 @@
 package com.leetcode.easy;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class Array {
 
@@ -73,6 +75,31 @@ public class Array {
         }
 
         return false;
+    }
+
+    /**
+     * (#136)
+     * Given a non-empty array of integers, every element appears twice except for one. Find that single one.
+     *
+     * Note:
+     *
+     * Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory?
+     *
+     * @param nums The non-empty array of integers.
+     * @return The single element.
+     */
+    public int singleNumber(int[] nums) {
+        Set<Integer> numSet = new HashSet<>();
+
+        for(int num : nums) {
+            if(!numSet.contains(num)) {
+                numSet.add(num);
+            } else {
+                numSet.remove(num);
+            }
+        }
+
+        return numSet.iterator().next();
     }
 
     /**
