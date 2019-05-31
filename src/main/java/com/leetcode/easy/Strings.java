@@ -1,5 +1,10 @@
 package com.leetcode.easy;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 public class Strings {
 
     /**
@@ -57,6 +62,38 @@ public class Strings {
         }
 
         return ret;
+    }
+
+    /**
+     * (#387)
+     * Given a string, find the first non-repeating character in it and return it's index. If it doesn't exist, return -1.
+     *
+     * @param s The string.
+     * @return The first non-repeating character's index.
+     */
+    public int firstUniqChar(String s) {
+        // char[](Original) : l e e t c o d e
+        // List(Compare)    : l t c o d e
+        // List(Index)      : 0 3 4 5 6 7
+        // Set(Repeated)    : e
+
+        char[] original = s.toCharArray();
+        List<Character> compare = new ArrayList<Character>();
+        List<Integer> index = new ArrayList<Integer>();
+        Set<Character> repeated = new HashSet<Character>();
+
+        for(int i = 0; i < original.length; i++) {
+            if(compare.contains(original[i])) {
+                index.remove(compare.indexOf(original[i]));     // Remove from index
+                compare.remove((Object) original[i]);           // Remove from compare
+                repeated.add(original[i]);                      // Add to repeated
+            } else if(!repeated.contains(original[i])) {
+                index.add(i);
+                compare.add(original[i]);
+            }
+        }
+
+        return (index.size()==0) ? -1 : index.get(0);
     }
 
     /**
@@ -146,4 +183,45 @@ public class Strings {
         return -1;
     }
 
+    /**
+     * (#14)
+     * Write a function to find the longest common prefix string amongst an array of strings.
+     *
+     * If there is no common prefix, return an empty string ""
+     *
+     * @param strs The array of strings.
+     * @return The longest common prefix.
+     */
+    public String longestCommonPrefix(String[] strs) {
+        if(strs.length == 0) {
+            return "";
+        }
+
+        if(strs.length == 1) {
+            return strs[0];
+        }
+
+        // Find smallest length
+        int min = Integer.MAX_VALUE;
+        for(String word : strs) {
+            min = (word.length() < min) ? word.length() : min;
+        }
+
+        // Matching (using 1st input as key)
+        boolean same = false;
+        String ret = "";
+
+        for(int i = 0; i < min; i++) {
+            char compare = strs[0].charAt(i);
+            for(int j = 1; j < strs.length; j++) {
+                same = (strs[j].charAt(i) == compare);
+                if(!same) break;
+            }
+
+            if(same) ret += String.valueOf(compare);
+            else break;
+        }
+
+        return ret;
+    }
 }

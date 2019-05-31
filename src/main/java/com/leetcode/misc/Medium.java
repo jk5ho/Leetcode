@@ -2,43 +2,10 @@ package com.leetcode.misc;
 
 import com.leetcode.util.ListNode;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Medium {
-
-    /**
-     * (#3)
-     * Given a string, find the length of the longest substring without repeating characters.
-     *
-     * @param s The string.
-     * @return The length of substring.
-     */
-    public int lengthOfLongestSubstring(String s) {
-        List<String> currentMap = new ArrayList<String>();
-        char[] charArray = s.toCharArray();
-        int max = 0;
-
-        if (charArray.length <= 1) {
-            return charArray.length;
-        }
-
-        for (int i = 0; i < charArray.length; i++) {
-            if(currentMap.contains(String.valueOf(charArray[i]))) {
-                int removeIndex = currentMap.indexOf(String.valueOf(charArray[i]));
-                currentMap.remove(removeIndex);
-                for(int j = 0; j < removeIndex; j++) {
-                    currentMap.remove(0);
-                }
-            }
-            currentMap.add(String.valueOf(charArray[i]));
-
-            if(currentMap.size() > max) {
-                max = currentMap.size();
-            }
-        }
-        return max;
-    }
 
     /**
      * (#6)
@@ -129,6 +96,62 @@ public class Medium {
         head.next = head.next.next;
 
         return returnNode.next;
+    }
+
+    /**
+     * (#287)
+     * Given an array nums containing n + 1 integers where each integer is between 1 and n (inclusive), prove that at least one duplicate number must exist.
+     * Assume that there is only one duplicate number, find the duplicate one.
+     *
+     * @param nums The array nums.
+     * @return The duplicated integer.
+     */
+    public int findDuplicate(int[] nums) {
+        Set<Integer> numSet = new HashSet<>();
+        for(int num : nums) {
+            if(!numSet.add(num)) {
+                return num;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * (#739)
+     * Given a list of daily temperatures T, return a list such that, for each day in the input, tells you how many days you would have to wait until a warmer temperature. If there is no future day for which this is possible, put 0 instead.
+     *
+     * For example, given the list of temperatures T = [73, 74, 75, 71, 69, 72, 76, 73], your output should be [1, 1, 4, 2, 1, 1, 0, 0].
+     *
+     * Note: The length of temperatures will be in the range [1, 30000]. Each temperature will be an integer in the range [30, 100].
+     *
+     * @param T The list of daily temperatures.
+     * @return The list of days to wait.
+     */
+    public int[] dailyTemperatures(int[] T) {
+        int size = T.length;
+        int[] ret = new int[T.length];
+        int[] nextHigh = new int[71];
+        int min = Integer.MAX_VALUE;
+        boolean found = false;
+
+        for(int i = size-1; i >= 0; i--) {
+            int curr = T[i];
+            nextHigh[curr-30] = i;
+
+            if(i != size-1) {
+                for(int j = curr-30; j < nextHigh.length; j++) {
+                    if(nextHigh[j] > i) {
+                        min = (nextHigh[j] - i < min) ? nextHigh[j] - i : min;
+                        found = true;
+                    }
+                }
+                ret[i] = (found) ? min : 0;
+                min = Integer.MAX_VALUE;
+                found = false;
+            }
+        }
+
+        return ret;
     }
 
 }

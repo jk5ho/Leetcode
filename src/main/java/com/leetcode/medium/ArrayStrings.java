@@ -100,4 +100,38 @@ public class ArrayStrings {
         return arrayList;
     }
 
+    /**
+     * (#3)
+     * Given a string, find the length of the longest substring without repeating characters.
+     *
+     * @param s The string.
+     * @return The length of longest substring.
+     */
+    public int lengthOfLongestSubstring(String s) {
+        int max = 0;
+        int count = 0;
+        List maxList = new ArrayList<String>();
+        char[] stringArray = s.toCharArray();
+
+        if(s.length() == 1) return 1;
+
+        for(int i = 0; i < stringArray.length; i++) {
+            if(maxList.contains(stringArray[i])) {
+                int temp = maxList.indexOf(stringArray[i]);
+                while(temp > 0) {
+                    maxList.remove(temp);
+                    count--;
+                    temp--;
+                }
+                maxList.remove(0);
+            } else {
+                count++;
+            }
+            maxList.add(stringArray[i]);
+            if(count > max) max = count;
+        }
+
+        return max;
+    }
+
 }

@@ -1,6 +1,9 @@
 package com.leetcode.misc;
 
+import com.leetcode.util.ListNode;
+
 import java.util.Arrays;
+import java.util.Stack;
 
 public class Easy {
 
@@ -20,61 +23,6 @@ public class Easy {
             }
         }
         return true;
-    }
-
-    /**
-     * (#14)
-     * Write a function to find the longest common prefix string amongst an array of strings.
-     *
-     * If there is no common prefix, return an empty string "".
-     *
-     * @param strs The array of strings.
-     * @return The longest common prefix.
-     */
-    public String longestCommonPrefix(String[] strs) {
-        int count = 0;
-        boolean same = true;
-
-        // Empty array, Single array
-        if(strs.length == 0) {
-            return "";
-        } else if (strs.length == 1) {
-            return strs[0];
-        }
-
-        // Shortest string
-        char[] temp = strs[0].toCharArray();
-
-        int j = 0;
-        while(same) {
-            for(int i = 0; i < strs.length; i++) {
-
-                // Empty strings
-                if(strs[i].equals("")) {
-                    return "";
-                }
-
-                char[] letters = strs[i].toCharArray();
-
-                // Length check
-                if(letters.length <= j) {
-                    return strs[i];
-                } else if (letters[j] != temp[j]) {
-                    same = false;
-                    break;
-                }
-                count++;
-            }
-            j++;
-        }
-
-        char[] retVal = new char[count / strs.length];
-        char[] letter = strs[0].toCharArray();
-        for(int k = 0; k < count / strs.length; k++) {
-            retVal[k] = letter[k];
-        }
-
-        return String.valueOf(retVal);
     }
 
     /**
@@ -101,6 +49,35 @@ public class Easy {
 
         return max;
 
+    }
+
+    /**
+     * (#206)
+     * Reverse a singly linked list.
+     *
+     * @param head The linked list.
+     * @return The reversed list.
+     */
+    public ListNode reverseList(ListNode head) {
+        Stack<Integer> reverseStack = new Stack<Integer>();
+
+        if(head == null) return null;
+
+        while(head.next != null) {
+            reverseStack.push(head.val);
+            head = head.next;
+        }
+        if(head.next == null) reverseStack.push(head.val);
+
+        ListNode reverseHead = new ListNode(0);
+        ListNode returnList = reverseHead;
+        while(!reverseStack.empty()) {
+            ListNode tempNode = new ListNode(reverseStack.pop());
+            reverseHead.next = tempNode;
+            reverseHead = reverseHead.next;
+        }
+
+        return returnList.next;
     }
 
     /**
