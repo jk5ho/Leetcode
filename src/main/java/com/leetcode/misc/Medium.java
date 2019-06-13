@@ -2,6 +2,8 @@ package com.leetcode.misc;
 
 import com.leetcode.util.ListNode;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -96,6 +98,70 @@ public class Medium {
         head.next = head.next.next;
 
         return returnNode.next;
+    }
+
+
+    /**
+     * (#56)
+     * Given a collection of intervals, merge all overlapping intervals.
+     *
+     * @param intervals The collection of intervals.
+     * @return The overlapping merged intervals.
+     */
+    public int[][] merge(int[][] intervals) {
+
+        // sorting by start
+        Arrays.sort(intervals, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                return o1[0] - o2[0];
+            }
+        });
+
+        int[][] list = new int[intervals.length][2];
+        int prev_end = Integer.MIN_VALUE;
+        int curr = 0;
+
+        for(int i = 0; i < intervals.length; i++) {
+            if(intervals[i][0] <= prev_end) {
+                // modify last merged
+                prev_end = Math.max(intervals[i][1], prev_end);
+                list[curr-1][1] = prev_end;
+            } else {
+                // adding new interval
+                prev_end = intervals[i][1];
+                list[curr][0] = intervals[i][0];
+                list[curr][1] = prev_end;
+                curr++;
+            }
+        }
+
+        return Arrays.copyOf(list, curr);
+    }
+
+    /**
+     * (#151)
+     * Given an input string, reverse the string word by word.
+     *
+     * @param s The input string.
+     * @return The reversed string.
+     */
+    public String reverseWords(String s) {
+
+        String prev = "";
+        String curr = "";
+
+        for(char letter : s.toCharArray()) {
+            if(!Character.isWhitespace(letter)) {
+                curr += letter;
+            } else if(curr != "") {
+                prev = " " + curr + prev;
+                curr = "";
+            }
+        }
+        prev = curr + prev;
+
+        return prev.trim();
     }
 
     /**

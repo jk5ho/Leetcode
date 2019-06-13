@@ -55,6 +55,38 @@ public class ArrayStrings {
     }
 
     /**
+     * (#73)
+     * Given a m x n matrix, if an element is 0, set its entire row and column to 0. Do it in-place.
+     *
+     * @param matrix The matrix.
+     */
+    public void setZeroes(int[][] matrix) {
+        List<Integer> rows = new ArrayList<Integer>();
+        List<Integer> cols = new ArrayList<Integer>();
+
+        for(int row = 0; row < matrix.length; row++) {
+            for(int col = 0; col < matrix[0].length; col++) {
+                if(matrix[row][col] == 0) {
+                    rows.add(row);
+                    cols.add(col);
+                }
+            }
+        }
+
+        for(int clearRow : rows) {
+            for(int i = 0; i < matrix[0].length; i++) {
+                matrix[clearRow][i] = 0;
+            }
+        }
+
+        for(int clearCol : cols) {
+            for(int i = 0; i < matrix.length; i++) {
+                matrix[i][clearCol] = 0;
+            }
+        }
+    }
+
+    /**
      * (#49)
      * Given an array of strings, group anagrams together.
      *

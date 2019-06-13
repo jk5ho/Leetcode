@@ -23,9 +23,9 @@ public class Array {
 
         for(int i = 1; i < size; i++){
             if(nums[i] != nums[i-1]){
-                length++;
                 nums[index] = nums[i];
                 index++;
+                length++;
             }
         }
 
@@ -40,8 +40,8 @@ public class Array {
      *
      * Note: You may not engage in multiple transactions at the same time (i.e., you must sell the stock before you buy again).
      *
-     * @param prices
-     * @return
+     * @param prices The price of a given stock.
+     * @return The maximum profit.
      */
     public int maxProfit(int[] prices) {
         int total = 0;

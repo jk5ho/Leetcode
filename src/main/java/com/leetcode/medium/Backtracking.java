@@ -46,7 +46,7 @@ public class Backtracking {
             ret.add(combination);
         }
 
-        // If there are stil digits left
+        // If there are still digits left
         else {
             int digit = Character.getNumericValue(next_digit.charAt(0));
             String letters = dialMap.get(digit);

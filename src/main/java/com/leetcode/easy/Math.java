@@ -44,8 +44,8 @@ public class Math {
      *
      * Given a roman numeral, convert it to an integer. Input is guaranteed to be within the range from 1 to 3999.
      *
-     * @param s
-     * @return
+     * @param s The roman numeral.
+     * @return The converted integer.
      */
     public int romanToInt(String s) {
 
