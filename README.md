@@ -31,7 +31,7 @@ Math                    | 412   | FizzBuzz
 Math                    | 13    | Roman to Integer
 Other                   | 20    | Valid Parentheses
 
-## Medium Questions (12)
+## Medium Questions (14)
 
 Link: https://leetcode.com/explore/interview/card/top-interview-questions-medium/
 
@@ -49,7 +49,7 @@ Backtracking            | 17    | Letter Combinations of a Phone Number
 Sorting and Searching   | 75    | Sort Colors
 Sorting and Searching   | 347   | Top K Frequent Elements
 Sorting and Searching   | 215   | Kth Largest Element in an Array
-Sorting and Searching   | 162   | Fine Peak Element
+Sorting and Searching   | 162   | Find Peak Element
 Sorting and Searching   | 34    | (Search for a Range) Find First and Last Position of Element in Sorted Array
 
 ## Misc Questions (9)
