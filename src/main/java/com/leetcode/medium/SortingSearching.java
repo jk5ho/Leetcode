@@ -37,6 +37,42 @@ public class SortingSearching {
     }
 
     /**
+     * (#347)
+     */
+    public int[] topKFrequent(int[] nums, int k) {
+        if(k == nums.length) return nums;
+
+        // Populate the hashmap <number, frequency>
+        Map<Integer, Integer> freqMap = new HashMap<Integer, Integer>();
+        for(int i = 0; i < nums.length; i++) {
+            if(!freqMap.containsKey(nums[i])){
+                freqMap.put(nums[i],1);
+            }
+            else {
+                freqMap.replace(nums[i], freqMap.get(nums[i])+1);
+            }
+        }
+
+        // Convert into arrays
+        Integer[] keys = freqMap.keySet().toArray(new Integer[0]);
+        Integer[] vals = freqMap.values().toArray(new Integer[0]);
+
+        // Iterate to find entries >= k
+        ArrayList<Integer> ret = new ArrayList<Integer>();
+
+        Integer[] temp2 = vals.clone();
+        Arrays.sort(temp2);
+        int min = temp2[temp2.length-k];
+
+        for(int i = 0; i < vals.length; i++) {
+            if(vals[i] >= min) {
+                ret.add(keys[i]);
+            }
+        }
+        return ret.stream().mapToInt(Integer::intValue).toArray();
+    }
+
+    /**
      * (#215)
      * Find the kth largest element in an unsorted array.
      * Note that it is the kth largest element in the sorted order, not the kth distinct element.
@@ -54,6 +90,21 @@ public class SortingSearching {
         }
 
         return temp;
+    }
+
+    /**
+     * (#162)
+     */
+    public int findPeakElement(int[] nums) {
+        int compare = Integer.MIN_VALUE;
+        for(int i = 0; i < nums.length; i++) {
+            if(nums[i] > compare) {
+                if((i < nums.length-1 && nums[i] > nums[i+1]) || (i == nums.length-1)) {
+                    return i;
+                }
+            }
+        }
+        return 0;
     }
 
     /**

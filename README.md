@@ -47,8 +47,10 @@ Trees and Graphs        | 94    | Binary Tree Inorder Traversal
 Trees and Graphs        | 230   | Kth Smallest Element in a BST
 Backtracking            | 17    | Letter Combinations of a Phone Number
 Sorting and Searching   | 75    | Sort Colors
+Sorting and Searching   | 347   | Top K Frequent Elements
 Sorting and Searching   | 215   | Kth Largest Element in an Array
-Sorting and Searching   | 34    |  (Search for a Range) Find First and Last Position of Element in Sorted Array
+Sorting and Searching   | 162   | Fine Peak Element
+Sorting and Searching   | 34    | (Search for a Range) Find First and Last Position of Element in Sorted Array
 
 ## Misc Questions (9)
 
