@@ -166,4 +166,29 @@ public class ArrayStrings {
         return max;
     }
 
+    /**
+     * (#334)
+     * Given an unsorted array return whether an increasing subsequence of length 3 exists or not in the array.
+     *
+     * @param nums The unsorted array.
+     * @return Whehter increasing subsequence exists.
+     */
+    public boolean increasingTriplet(int[] nums) {
+        int one = Integer.MAX_VALUE;
+        int two = Integer.MAX_VALUE;
+
+        for(int i = 0; i < nums.length; i++) {
+            if(i == 0 || nums[i] <= one) {
+                one = nums[i];
+            } else {
+                if(nums[i] <= two) {
+                    two = nums[i];
+                } else {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 }

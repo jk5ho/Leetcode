@@ -31,7 +31,7 @@ Math                    | 412   | FizzBuzz
 Math                    | 13    | Roman to Integer
 Other                   | 20    | Valid Parentheses
 
-## Medium Questions (14)
+## Medium Questions (15)
 
 Link: https://leetcode.com/explore/interview/card/top-interview-questions-medium/
 
@@ -41,6 +41,7 @@ Array and Strings       | 15    | 3Sum
 Array and Strings       | 73    | Set Matrix Zeroes
 Array and Strings       | 49    | Group Anagrams
 Array and Strings       | 3     | Longest Substring Without Repeating Characters
+Array and Strings       | 334   | Increasing Triplet Subsequence
 Linked-List             | 2     | Add Two Numbers
 Linked-List             | 328   | Odd Even Linked List
 Trees and Graphs        | 94    | Binary Tree Inorder Traversal
