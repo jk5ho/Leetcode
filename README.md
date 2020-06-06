@@ -45,6 +45,7 @@ Array and Strings       | 334   | Increasing Triplet Subsequence
 Linked-List             | 2     | Add Two Numbers
 Linked-List             | 328   | Odd Even Linked List
 Trees and Graphs        | 94    | Binary Tree Inorder Traversal
+Trees and Graphs        | 116   | Populating Next Right Pointers in Each Node
 Trees and Graphs        | 230   | Kth Smallest Element in a BST
 Backtracking            | 17    | Letter Combinations of a Phone Number
 Sorting and Searching   | 75    | Sort Colors
@@ -53,7 +54,7 @@ Sorting and Searching   | 215   | Kth Largest Element in an Array
 Sorting and Searching   | 162   | Find Peak Element
 Sorting and Searching   | 34    | (Search for a Range) Find First and Last Position of Element in Sorted Array
 
-## Misc Questions (9)
+## Misc Questions (10)
 
 Link: https://leetcode.com/problemset/all/
 
@@ -66,5 +67,6 @@ Medium  | 56    | Merge Intervals
 Easy    | 206   | Reverse Linked List
 Easy    | 268   | Missing Number
 Medium  | 151   | Reverse Words in a String
+Medium  | 228   | Summary Ranges
 Medium  | 287   | Find the Duplicate Number
 Medium  | 739   | Daily Temperatures

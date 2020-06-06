@@ -38,6 +38,11 @@ public class SortingSearching {
 
     /**
      * (#347)
+     * Given a non-empty array of integers, return the k most frequent elements.
+     *
+     * @param nums The non empty array of integers.
+     * @param k The k most frequent.
+     * @return The k most frequent elements.
      */
     public int[] topKFrequent(int[] nums, int k) {
         if(k == nums.length) return nums;
@@ -94,6 +99,16 @@ public class SortingSearching {
 
     /**
      * (#162)
+     * A peak element is an element that is greater than its neighbors.
+     *
+     * Given an input array nums, where nums[i] ≠ nums[i+1], find a peak element and return its index.
+     *
+     * The array may contain multiple peaks, in that case return the index to any one of the peaks is fine.
+     *
+     * You may imagine that nums[-1] = nums[n] = -∞.
+     *
+     * @param nums The input array.
+     * @return The peak element.
      */
     public int findPeakElement(int[] nums) {
         int compare = Integer.MIN_VALUE;

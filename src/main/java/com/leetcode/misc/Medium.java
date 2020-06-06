@@ -2,10 +2,7 @@ package com.leetcode.misc;
 
 import com.leetcode.util.ListNode;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class Medium {
 
@@ -162,6 +159,41 @@ public class Medium {
         prev = curr + prev;
 
         return prev.trim();
+    }
+
+    /**
+     * (#228)
+     * Given a sorted integer array without duplicates, return the summary of its ranges.
+     *
+     * @param nums The sorted integer array.
+     * @return The summary of its ranges.
+     */
+    public List<String> summaryRanges(int[] nums) {
+        List<String> ret = new ArrayList<>();
+        if(nums.length == 0) return ret;
+
+        int head = nums[0];
+        int tail = nums[0];
+        if(nums.length == 1){
+            ret.add(Integer.toString(tail));
+            return ret;
+        }
+
+        StringBuilder s = new StringBuilder();
+        for(int i = 1; i < nums.length; i++) {
+            if(nums[i] != tail+1) {
+                s.append(head);
+                if(head != tail) s.append("->").append(tail);
+                ret.add(s.toString());
+                s = new StringBuilder();
+                head = nums[i];
+            }
+            tail = nums[i];
+        }
+        s.append(head);
+        if(head != tail) s.append("->").append(tail);
+        ret.add(s.toString());
+        return ret;
     }
 
     /**
