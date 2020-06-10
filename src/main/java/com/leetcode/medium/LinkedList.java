@@ -85,4 +85,50 @@ public class LinkedList {
 
         return head;
     }
+
+    /**
+     * (#160)
+     * Write a program to find the node at which the intersection of two singly linked lists begins.
+     *
+     * @param headA First linked List.
+     * @param headB Second Linked List.
+     * @return Intersection of two singly linked list.
+     */
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        if(headA == null || headB == null) return null;
+        if(headA == headB) return headA;
+
+        int lengthA = 1;
+        ListNode currA = headA;
+        while(currA.next != null) {
+            currA = currA.next;
+            lengthA++;
+        }
+
+        int lengthB = 1;
+        ListNode currB = headB;
+        while(currB.next != null) {
+            currB = currB.next;
+            lengthB++;
+        }
+
+        if(lengthA > lengthB) {
+            for(int a = 0; a < lengthA-lengthB; a++) {
+                headA = headA.next;
+            }
+        } else {
+            for(int b = 0; b < lengthB- lengthA; b++) {
+                headB = headB.next;
+            }
+        }
+
+        while(headA!=null||headB!=null) {
+            if(headA == headB) {
+                return headA;
+            }
+            headA=headA.next;
+            headB=headB.next;
+        }
+        return null;
+    }
 }

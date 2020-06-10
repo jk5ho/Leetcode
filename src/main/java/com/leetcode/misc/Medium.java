@@ -1,6 +1,7 @@
 package com.leetcode.misc;
 
 import com.leetcode.util.ListNode;
+import javafx.util.Pair;
 
 import java.util.*;
 
@@ -97,6 +98,31 @@ public class Medium {
         return returnNode.next;
     }
 
+    /**
+     * (#24)
+     * Given a linked list, swap every two adjacent nodes and return its head.
+     *
+     * You may not modify the values in the list's nodes, only nodes itself may be changed.
+     *
+     * @param head The linked list.
+     * @return The updated linked list.
+     */
+    public ListNode swapPairs(ListNode head) {
+        ListNode copyHead = new ListNode(0);
+        ListNode prev = copyHead;
+        ListNode temp = head;
+
+        while(temp != null && temp.next != null) {
+            ListNode tail = temp.next.next;
+            prev.next = temp.next;
+            prev = prev.next;
+            prev.next = temp;
+            prev = prev.next;
+            prev.next = tail;
+            temp = temp.next;
+        }
+        return copyHead.next;
+    }
 
     /**
      * (#56)
@@ -134,6 +160,35 @@ public class Medium {
         }
 
         return Arrays.copyOf(list, curr);
+    }
+
+    /**
+     * (#80)
+     * Given a sorted array nums, remove the duplicates in-place such that duplicates appeared at most twice and return the new length.
+     *
+     * Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory.
+     *
+     * @param nums The sorted array nums.
+     * @return The new length.
+     */
+    public int removeDuplicates(int[] nums) {
+        if(nums.length == 0) return 0;
+        int tracer = 1;
+        int count = 1;
+        int prev = nums[0];
+        for(int i = 1; i < nums.length; i++) {
+            if(prev == nums[i]) {
+                count++;
+            } else {
+                prev = nums[i];
+                count = 1;
+            }
+            if(count <= 2) {
+                nums[tracer] = nums[i];
+                tracer++;
+            }
+        }
+        return tracer;
     }
 
     /**
@@ -239,7 +294,7 @@ public class Medium {
             if(i != size-1) {
                 for(int j = curr-30; j < nextHigh.length; j++) {
                     if(nextHigh[j] > i) {
-                        min = (nextHigh[j] - i < min) ? nextHigh[j] - i : min;
+                        min = Math.min(nextHigh[j] - i, min);
                         found = true;
                     }
                 }
@@ -249,6 +304,84 @@ public class Medium {
             }
         }
 
+        return ret;
+    }
+
+    /**
+     * (#885)
+     * On a 2 dimensional grid with R rows and C columns, we start at (r0, c0) facing east.
+     *
+     * Here, the north-west corner of the grid is at the first row and column, and the south-east corner of the grid is at the last row and column.
+     *
+     * Now, we walk in a clockwise spiral shape to visit every position in this grid.
+     *
+     * Whenever we would move outside the boundary of the grid, we continue our walk outside the grid (but may return to the grid boundary later.)
+     *
+     * Eventually, we reach all R * C spaces of the grid.
+     *
+     * Return a list of coordinates representing the positions of the grid in the order they were visited.
+     *
+     * @param R The total rows.
+     * @param C The total columns.
+     * @param r0 The starting row.
+     * @param c0 The starting column.
+     * @return The list of coordinates.
+     */
+    public int[][] spiralMatrixIII(int R, int C, int r0, int c0) {
+        List<Pair<Integer, Integer>> list = new ArrayList<>();
+        int countR = 1;
+        int countC = 1;
+        int currR, currC;
+
+        list.add(new Pair<>(r0, c0));
+        int total = R * C;
+        int added = 1;
+        while(added < total) {
+            currC = 0;
+            while( currC++ < countC ) {
+                c0++;
+                if(r0 >= 0 && c0 >= 0 && r0 < R && c0 < C) {
+                    list.add(new Pair<>(r0, c0));
+                    added++;
+                }
+            }
+            currR = 0;
+            while( currR++ < countR ) {
+                r0++;
+                if(r0 >= 0 && c0 >= 0 && r0 < R && c0 < C) {
+                    list.add(new Pair<>(r0, c0));
+                    added++;
+                }
+            }
+            countC++;
+            countR++;
+            currC = 0;
+            while( currC++ < countC ) {
+                c0--;
+                if(r0 >= 0 && c0 >= 0 && r0 < R && c0 < C) {
+                    list.add(new Pair<>(r0, c0));
+                    added++;
+                }
+            }
+            currR = 0;
+            while( currR++ < countR ) {
+                r0--;
+                if(r0 >= 0 && c0 >= 0 && r0 < R && c0 < C) {
+                    list.add(new Pair<>(r0, c0));
+                    added++;
+                }
+            }
+            countC++;
+            countR++;
+        }
+
+        int index = 0;
+        int[][] ret = new int[added][2];
+        for(Pair<Integer, Integer> point : list) {
+            ret[index][0] = point.getKey();
+            ret[index][1] = point.getValue();
+            index++;
+        }
         return ret;
     }
 

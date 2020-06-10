@@ -31,7 +31,7 @@ Math                    | 412   | FizzBuzz
 Math                    | 13    | Roman to Integer
 Other                   | 20    | Valid Parentheses
 
-## Medium Questions (15)
+## Medium Questions (17)
 
 Link: https://leetcode.com/explore/interview/card/top-interview-questions-medium/
 
@@ -47,6 +47,7 @@ Linked-List             | 328   | Odd Even Linked List
 Trees and Graphs        | 94    | Binary Tree Inorder Traversal
 Trees and Graphs        | 116   | Populating Next Right Pointers in Each Node
 Trees and Graphs        | 230   | Kth Smallest Element in a BST
+Trees and Graphs        | 200   | Number of Islands
 Backtracking            | 17    | Letter Combinations of a Phone Number
 Sorting and Searching   | 75    | Sort Colors
 Sorting and Searching   | 347   | Top K Frequent Elements
@@ -54,7 +55,7 @@ Sorting and Searching   | 215   | Kth Largest Element in an Array
 Sorting and Searching   | 162   | Find Peak Element
 Sorting and Searching   | 34    | (Search for a Range) Find First and Last Position of Element in Sorted Array
 
-## Misc Questions (10)
+## Misc Questions (13)
 
 Link: https://leetcode.com/problemset/all/
 
@@ -63,10 +64,13 @@ Difficulty | Number | Question
 Medium  | 6     | ZigZag Conversion
 Easy    | 9     | Palindrome Number
 Medium  | 19    | Remove Nth Node From End of List
+Medium  | 24    | Swap Nodes in Pairs
 Medium  | 56    | Merge Intervals
+Medium  | 80    | Remove Duplicates form Sorted Array II
 Easy    | 206   | Reverse Linked List
 Easy    | 268   | Missing Number
 Medium  | 151   | Reverse Words in a String
 Medium  | 228   | Summary Ranges
 Medium  | 287   | Find the Duplicate Number
 Medium  | 739   | Daily Temperatures
+Medium  | 885   | Spiral Matrix III
