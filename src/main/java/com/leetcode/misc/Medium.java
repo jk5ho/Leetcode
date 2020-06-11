@@ -269,6 +269,81 @@ public class Medium {
         return -1;
     }
 
+    static int rows;
+    static int cols;
+    /**
+     * (#289)
+     * According to the Wikipedia's article: "The Game of Life, also known simply as Life, is a cellular automaton devised by the British mathematician John Horton Conway in 1970."
+     *
+     * Given a board with m by n cells, each cell has an initial state live (1) or dead (0). Each cell interacts with its eight neighbors (horizontal, vertical, diagonal) using the following four rules (taken from the above Wikipedia article):
+     *
+     *     Any live cell with fewer than two live neighbors dies, as if caused by under-population.
+     *     Any live cell with two or three live neighbors lives on to the next generation.
+     *     Any live cell with more than three live neighbors dies, as if by over-population..
+     *     Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.
+     *
+     * Write a function to compute the next state (after one update) of the board given its current state. The next state is created by applying the above rules simultaneously to every cell in the current state, where births and deaths occur simultaneously.
+     *
+     * @param board The Game of Life board.
+     */
+    public void gameOfLife(int[][] board) {
+        cols = board.length;
+        rows = board[0].length;
+
+        Set<Pair<Integer, Integer>> points = new HashSet<>();
+        for(int y = 0; y < rows; y++) {
+            for(int x = 0; x < cols; x++) {
+                if(shouldToggle(x, y, board)) {
+                    points.add(new Pair<>(x, y));
+                }
+            }
+        }
+
+        Iterator<Pair<Integer, Integer>> itr = points.iterator();
+        while(itr.hasNext()) {
+            Pair<Integer, Integer> currPoint = itr.next();
+            doToggle(currPoint.getKey(), currPoint.getValue(), board);
+        }
+    }
+
+    public void doToggle(int x, int y, int[][] board) {
+        if(board[x][y]==0) {
+            board[x][y]=1;
+        } else {
+            board[x][y]=0;
+        }
+    }
+
+    public boolean shouldToggle(int x, int y, int[][] grid) {
+        int alives = 0;
+        if(x-1 >= 0 && grid[x-1][y] == 1) {
+            alives++;
+        }
+        if(y-1 >= 0 && grid[x][y-1] == 1) {
+            alives++;
+        }
+        if(x+1 <= cols-1 && grid[x+1][y] == 1) {
+            alives++;
+        }
+        if(y+1 <= rows-1 && grid[x][y+1] == 1) {
+            alives++;
+        }
+        if(x-1 >= 0 && y-1 >= 0 && grid[x-1][y-1] == 1) {
+            alives++;
+        }
+        if(x-1 >= 0 && y+1 <= rows-1 && grid[x-1][y+1] == 1) {
+            alives++;
+        }
+        if(x+1 <= cols-1 && y-1 >= 0 && grid[x+1][y-1] == 1) {
+            alives++;
+        }
+        if(x+1 <= cols-1 && y+1 <= rows-1 && grid[x+1][y+1] == 1) {
+            alives++;
+        }
+
+        return ((alives > 3 && grid[x][y] == 1) || (alives < 2 && grid[x][y] == 1) || (alives == 3 && grid[x][y] == 0));
+    }
+
     /**
      * (#739)
      * Given a list of daily temperatures T, return a list such that, for each day in the input, tells you how many days you would have to wait until a warmer temperature. If there is no future day for which this is possible, put 0 instead.
@@ -305,6 +380,58 @@ public class Medium {
         }
 
         return ret;
+    }
+
+    /**
+     * (#791)
+     * S and T are strings composed of lowercase letters. In S, no letter occurs more than once.
+     *
+     * S was sorted in some custom order previously. We want to permute the characters of T so that they match the order that S was sorted. More specifically, if x occurs before y in S, then x should occur before y in the returned string.
+     *
+     * Return any permutation of T (as a string) that satisfies this property.
+     *
+     * @param S Sorted string pattern.
+     * @param T String to sort.
+     * @return Sorted string T based on pattern.
+     */
+    public String customSortString(String S, String T) {
+        Map<Character, Integer> letters = new HashMap<>();
+        Set<Character> distincts = new HashSet<>();
+        StringBuilder s = new StringBuilder();
+
+        for(char letter : T.toCharArray()) {
+            if(letters.containsKey(letter)) {
+                int frequency = letters.get(letter);
+                letters.put(letter, ++frequency);
+            } else {
+                letters.put(letter, 1);
+                distincts.add(letter);
+            }
+        }
+
+        for(char letter : S.toCharArray()) {
+            if(letters.containsKey(letter)) {
+                int frequency = letters.get(letter);
+                distincts.remove(letter);
+                for(int n = 0; n < frequency; n++) {
+                    s.append(letter);
+                }
+            }
+        }
+
+        if(!distincts.isEmpty()) {
+            Iterator itr = distincts.iterator();
+            while(itr.hasNext()) {
+                char letter = (char)itr.next();
+                int frequency = letters.get(letter);
+                for(int n = 0; n < frequency; n++) {
+                    s.append(letter);
+                }
+                itr.remove();
+            }
+        }
+
+        return s.toString();
     }
 
     /**

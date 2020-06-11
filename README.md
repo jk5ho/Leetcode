@@ -55,7 +55,7 @@ Sorting and Searching   | 215   | Kth Largest Element in an Array
 Sorting and Searching   | 162   | Find Peak Element
 Sorting and Searching   | 34    | (Search for a Range) Find First and Last Position of Element in Sorted Array
 
-## Misc Questions (13)
+## Misc Questions (16)
 
 Link: https://leetcode.com/problemset/all/
 
@@ -67,10 +67,12 @@ Medium  | 19    | Remove Nth Node From End of List
 Medium  | 24    | Swap Nodes in Pairs
 Medium  | 56    | Merge Intervals
 Medium  | 80    | Remove Duplicates form Sorted Array II
+Medium  | 151   | Reverse Words in a String
 Easy    | 206   | Reverse Linked List
 Easy    | 268   | Missing Number
-Medium  | 151   | Reverse Words in a String
 Medium  | 228   | Summary Ranges
 Medium  | 287   | Find the Duplicate Number
+Medium  | 289   | Game of Life
 Medium  | 739   | Daily Temperatures
+Medium  | 791   | Custom Sort String
 Medium  | 885   | Spiral Matrix III
