@@ -55,7 +55,7 @@ Sorting and Searching   | 215   | Kth Largest Element in an Array
 Sorting and Searching   | 162   | Find Peak Element
 Sorting and Searching   | 34    | (Search for a Range) Find First and Last Position of Element in Sorted Array
 
-## Misc Questions (16)
+## Misc Questions (18)
 
 Link: https://leetcode.com/problemset/all/
 
@@ -73,6 +73,9 @@ Easy    | 268   | Missing Number
 Medium  | 228   | Summary Ranges
 Medium  | 287   | Find the Duplicate Number
 Medium  | 289   | Game of Life
+Medium  | 658   | Find K Closest Elements
+Medium  | 609   | Find Duplicate File in System
 Medium  | 739   | Daily Temperatures
 Medium  | 791   | Custom Sort String
 Medium  | 885   | Spiral Matrix III
+Medium  | 1276  | Number of Burgers with No Waste of Ingredients

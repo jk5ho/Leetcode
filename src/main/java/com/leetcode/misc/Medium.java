@@ -315,6 +315,7 @@ public class Medium {
     }
 
     public boolean shouldToggle(int x, int y, int[][] grid) {
+
         int alives = 0;
         if(x-1 >= 0 && grid[x-1][y] == 1) {
             alives++;
@@ -342,6 +343,118 @@ public class Medium {
         }
 
         return ((alives > 3 && grid[x][y] == 1) || (alives < 2 && grid[x][y] == 1) || (alives == 3 && grid[x][y] == 0));
+    }
+
+    /**
+     * (#658)
+     * Given a sorted array arr, two integers k and x, find the k closest elements to x in the array.
+     * The result should also be sorted in ascending order.
+     * If there is a tie, the smaller elements are always preferred.
+     *
+     * @param arr The sorted array.
+     * @param k The number closest.
+     * @param x The number target.
+     * @return The k closest elements to x.
+     */
+    public List<Integer> findClosestElements(int[] arr, int k, int x) {
+        List<Integer> window = new ArrayList<>();
+
+        if(x > arr[arr.length-1]) {
+            for(int i = arr.length-k; i < arr.length; i++) {
+                window.add(arr[i]);
+            }
+            return window;
+        }
+
+        if(x < arr[0]) {
+            for(int i = 0; i < k; i++) {
+                window.add(arr[i]);
+            }
+            return window;
+        }
+
+        for(int i = 0; i < arr.length; i++) {
+            if(window.size()<k) {
+                window.add(arr[i]);
+            } else {
+                if(Math.abs(arr[i]-x) < Math.abs(x-window.get(0))) {
+                    window.remove(0);
+                    window.add(arr[i]);
+                }
+            }
+        }
+
+        return window;
+    }
+
+    /**
+     * (#609)
+     * Given a list of directory info including directory path, and all the files with contents in this directory, you need to find out all the groups of duplicate files in the file system in terms of their paths.
+     *
+     * A group of duplicate files consists of at least two files that have exactly the same content.
+     *
+     * A single directory info string in the input list has the following format:
+     *
+     *  "root/d1/d2/.../dm f1.txt(f1_content) f2.txt(f2_content) ... fn.txt(fn_content)"
+     *
+     * It means there are n files (f1.txt, f2.txt ... fn.txt with content f1_content, f2_content ... fn_content, respectively) in directory root/d1/d2/.../dm. Note that n >= 1 and m >= 0. If m = 0, it means the directory is just the root directory.
+     *
+     * The output is a list of group of duplicate file paths. For each group, it contains all the file paths of the files that have the same content. A file path is a string that has the following format:
+     *
+     *  "directory_path/file_name.txt"
+     *
+     * @param paths The list of directory paths.
+     * @return The duplicated files.
+     */
+    public List<List<String>> findDuplicate(String[] paths) {
+        Map<String, List<String>> contentPaths = new HashMap<>();
+
+        for(String path : paths) {
+
+            List<String> mapping = splitPath(path);
+            String directory = mapping.remove(0);
+
+            for(String file : mapping) {
+                char[] fileName = file.toCharArray();
+                int i = fileName.length-2;
+                StringBuilder key = new StringBuilder();
+                while(fileName[i] != '(') {
+                    key.append(fileName[i]);
+                    i--;
+                }
+
+                List<String> temp = new ArrayList<String>();
+                if(contentPaths.containsKey(key.toString())) {
+                    temp = contentPaths.get(key.toString());
+                }
+                temp.add(directory + "/" + file.substring(0,i));
+                contentPaths.put(key.toString(), temp);
+            }
+
+        }
+
+        List<List<String>> ret = new ArrayList<>();
+        for(Map.Entry<String, List<String>> val : contentPaths.entrySet()) {
+            if(val.getValue().size() > 1 ) {
+                ret.add(val.getValue());
+            }
+        }
+        return ret;
+    }
+
+    public List<String> splitPath(String path) {
+        List<String> ret = new ArrayList<>();
+        StringBuilder s = new StringBuilder();
+        for(char letter : path.toCharArray()) {
+            if(letter == ' ') {
+                ret.add(s.toString());
+                s = new StringBuilder();
+            } else {
+                s.append(letter);
+            }
+        }
+        ret.add(s.toString());
+        return ret;
     }
 
     /**
@@ -510,6 +623,31 @@ public class Medium {
             index++;
         }
         return ret;
+    }
+
+    /**
+     * (#1276)
+     * Given two integers tomatoSlices and cheeseSlices. The ingredients of different burgers are as follows:
+     *
+     *     Jumbo Burger: 4 tomato slices and 1 cheese slice.
+     *     Small Burger: 2 Tomato slices and 1 cheese slice.
+     *
+     * Return [total_jumbo, total_small] so that the number of remaining tomatoSlices equal to 0 and the number of remaining cheeseSlices equal to 0.
+     * If it is not possible to make the remaining tomatoSlices and cheeseSlices equal to 0 return [].
+     *
+     * @param tomatoSlices Number of tomato slices.
+     * @param cheeseSlices Number of cheese slices.
+     * @return Number of Jumbo and Small burgers.
+     */
+    public List<Integer> numOfBurgers(int tomatoSlices, int cheeseSlices) {
+        List<Integer> pair = new ArrayList<>();
+        if( tomatoSlices % 2 == 1 || tomatoSlices < 2*cheeseSlices || tomatoSlices > 4*cheeseSlices ) {
+            return pair;
+        }
+
+        pair.add((tomatoSlices - 2*cheeseSlices) / 2);
+        pair.add((4*cheeseSlices - tomatoSlices) / 2);
+        return pair;
     }
 
 }
