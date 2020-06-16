@@ -73,6 +73,7 @@ Easy    | 268   | Missing Number
 Medium  | 228   | Summary Ranges
 Medium  | 287   | Find the Duplicate Number
 Medium  | 289   | Game of Life
+Medium  | 442   | Find All Duplicates in an Array
 Medium  | 658   | Find K Closest Elements
 Medium  | 609   | Find Duplicate File in System
 Medium  | 739   | Daily Temperatures
